@@ -4,7 +4,7 @@
 
 void GPIO_Config(){
 	GPIO_InitTypeDef GPIO_InitStructure;
-	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE); //ledlerimiz için
+	RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOB,ENABLE); //ledlerimiz iÃ§in
 	
 	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_Out_PP;
 	GPIO_InitStructure.GPIO_Pin   = GPIO_Pin_0 | GPIO_Pin_1 |GPIO_Pin_2 ;
@@ -25,8 +25,8 @@ void timer_config(){
 	
 	TIM_TimeBaseInitStructure.TIM_ClockDivision     = 1;
 	TIM_TimeBaseInitStructure.TIM_CounterMode       = TIM_CounterMode_Up;
-	TIM_TimeBaseInitStructure.TIM_Period            =
-	TIM_TimeBaseInitStructure.TIM_Prescaler         =     //2 SN DE INTERUPTA A GIRSIN...
+	TIM_TimeBaseInitStructure.TIM_Period            = 11999;
+	TIM_TimeBaseInitStructure.TIM_Prescaler         = 3999;   //2 SN DE INTERUPTA A GIRSIN...
 	TIM_TimeBaseInitStructure.TIM_RepetitionCounter = 0;
 	
 	TIM_TimeBaseInit(TIM3,&TIM_TimeBaseInitStructure);
@@ -38,13 +38,13 @@ void timer_config(){
 	//  24mHZ /  ((11999+1)*(3999+1))  = 1/2  ----- FREAKNS 2 OLUR 
 	
 	
-	//NVI ILE KESMENIN ÖNCELIGINI BELIRLEMEM GEREKLI
+	//NVI ILE KESMENIN Ã–NCELIGINI BELIRLEMEM GEREKLI
 	NVIC_InitStructure.NVIC_IRQChannel   								 = TIM3_IRQn;   			//TIM IN HANGI FONSKSIOYNA GIRMESI GEREKTIGINI BELIRTIK
 	NVIC_InitStructure.NVIC_IRQChannelCmd 							 = ENABLE;     			 //FONSKSIYONA GIRMESINI SITIORUZ
 	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
 	NVIC_InitStructure.NVIC_IRQChannelSubPriority 			 = 0;
 
-	TIM_ITConfig(TIM3,TIM_IT_Update,ENABLE);       													//timerin güncellenmesini sagliyacak config ayari
+	TIM_ITConfig(TIM3,TIM_IT_Update,ENABLE);       													//timerin gÃ¼ncellenmesini sagliyacak config ayari
 	
 	//interrupt u init edebiliriz
 	
