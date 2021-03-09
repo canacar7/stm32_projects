@@ -24,21 +24,26 @@ void timerConfig(){
 	 TIM_TimeBaseInitStructure.TIM_Period        = 4799;
 	 TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1; 
 	 TIM_TimeBaseInitStructure.TIM_CounterMode   = TIM_CounterMode_Up;
+	
+	TIM_TimeBaseInit(TIM2,&TIM_TimeInitStructure);
+	TIM_Cmd(TIM2,ENABLE);
 }
 
 void pwmConfig(uint16_t time_pulse){
 
 	TIM_OCInitTypeDef TIM_OCInitStructure;
 
-	TIM_OCInitStructure.TIM_OCMode       = TIM_OCMode_PWM1;         //pwm1 modunda çalissin istedik,: Çikti karsilastirma modunu belirler 
+	TIM_OCInitStructure.TIM_OCMode       = TIM_OCMode_PWM1;         //pwm1 modunda Ã§alissin istedik,: Ã‡ikti karsilastirma modunu belirler 
 	TIM_OCInitStructure.TIM_OutputState  = TIM_OutputState_Enable;  //CIKIS ALMAK ISTERSEK ENABLE
-	TIM_OCInitStructure.TIM_OCPolarity   = TIM_OCPolarity_High;     //çikis kanalini yükseten veya alçaktan baslamasini tanimlar
-	TIM_OCInitStructure.TIM_Pulse        = time_pulse  ;            //Bu alanin içerigi CCRx kaydinin içinde saklanir ve çikti tetiklemek için kullanilir.
+	TIM_OCInitStructure.TIM_OCPolarity   = TIM_OCPolarity_High;     //Ã§ikis kanalini yÃ¼kseten veya alÃ§aktan baslamasini tanimlar
+	TIM_OCInitStructure.TIM_Pulse        = time_pulse  ;            //Bu alanin iÃ§erigi CCRx kaydinin iÃ§inde saklanir ve Ã§ikti tetiklemek iÃ§in kullanilir.
 	
 	//TIMpulse = ((timer_period + 1) * Duty_Cycle / 100) - 1	
  
 	TIM_OC1Init(TIM2,&TIM_OCInitStructure);                         //ATAMAMI CH1 KISMINA YAPTIK
 	TIM_OC2PreloadConfig(TIM2,TIM_OCPreload_Enable);
+	
+	
 
 }
 
@@ -46,10 +51,10 @@ void pwm2Config(uint16_t time_pulse){
 	
 	TIM_OCInitTypeDef TIM_OCInitStructure;
 
-	TIM_OCInitStructure.TIM_OCMode       = TIM_OCMode_PWM2;         //pwm2 modunda çalissin istedik,: Çikti karsilastirma modunu belirler 
+	TIM_OCInitStructure.TIM_OCMode       = TIM_OCMode_PWM2;         //pwm2 modunda Ã§alissin istedik,: Ã‡ikti karsilastirma modunu belirler 
 	TIM_OCInitStructure.TIM_OutputState  = TIM_OutputState_Enable;  //CIKIS ALMAK ISTERSEK ENABLE
-	TIM_OCInitStructure.TIM_OCPolarity   = TIM_OCPolarity_High;     //çikis kanalini yükseten veya alçaktan baslamasini tanimlar
-	TIM_OCInitStructure.TIM_Pulse        = time_pulse  ;            //Bu alanin içerigi CCRx kaydinin içinde saklanir ve çikti tetiklemek için kullanilir.
+	TIM_OCInitStructure.TIM_OCPolarity   = TIM_OCPolarity_High;     //Ã§ikis kanalini yÃ¼kseten veya alÃ§aktan baslamasini tanimlar
+	TIM_OCInitStructure.TIM_Pulse        = time_pulse  ;            //Bu alanin iÃ§erigi CCRx kaydinin iÃ§inde saklanir ve Ã§ikti tetiklemek iÃ§in kullanilir.
 	
 	//TIMpulse = ((timer_period + 1) * Duty_Cycle / 100) - 1	
  
