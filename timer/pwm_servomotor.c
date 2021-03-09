@@ -25,7 +25,7 @@ void timerConfig(){
 	 TIM_TimeBaseInitStructure.TIM_ClockDivision = TIM_CKD_DIV1; 
 	 TIM_TimeBaseInitStructure.TIM_CounterMode   = TIM_CounterMode_Up;
 	
-	TIM_TimeBaseInit(TIM2,&TIM_TimeInitStructure);
+	TIM_TimeBaseInit(TIM2,&TIM_TimeBaseInitStructure);
 	TIM_Cmd(TIM2,ENABLE);
 }
 
