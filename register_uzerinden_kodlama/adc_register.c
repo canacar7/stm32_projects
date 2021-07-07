@@ -6,14 +6,14 @@ uint8_t adc_value = 0;
 
 void CLK_Config(void){
 
-	//1. adım clk HSE secilir
+	//1. adÃ½m clk HSE secilir
 	RCC -> CR |= 0X00030000;
 	//HSE kontrolu icin 17. bitdeki HSERDY kontrol edilir
 	while(!(RCC -> CR & 0X00020000));
 	//CSS BAYRAGI DA 1 YAPILMALIDIR
 	RCC -> CR |= 0X000800000;
 
-	//PLL AYARLARINA GECELİM
+	//PLL AYARLARINA GECELÃM
 	//PLL AYARLARINDA ILK OLARAK HSE KULLANCAMIZ BELIRTILIR
 	//PLLCFGR REGISTERLARINA BAKARIZ
 	RCC -> PLLCFGR |= 0X00400000;
@@ -35,7 +35,7 @@ void CLK_Config(void){
 
 void GPIO_Config(void){
 
-	//gpıoa nın hattı olan AHB1 acılır
+	//gpÃ½oa nÃ½n hattÃ½ olan AHB1 acÃ½lÃ½r
 	RCC -> AHB1ENR |= 0X00000001;
 
 	//GPIO NUN OZELLIKLERINI KONFIRME ETMEM GEREKIR
@@ -67,18 +67,19 @@ void ADC_Config(void){
 
 uint8_t Read_ADC() {
 
-
-	//duzenli kanallarda okuma isleminin baslaması swstart bitini1 yapmam gerekli
+	uint8_t deger = 0;
+	
+	//duzenli kanallarda okuma isleminin baslamasÃ½ swstart bitini1 yapmam gerekli
 	ADC1 -> CR2 |= 0X40000000;
 
 	//EOC FLAGINI KONTROL EDEREK OKUMA ISLEMINI SAGLARIM
-	while(!(ADC1 -> SR && 0X00000002));
+	while(!(ADC1 -> SR & 0X00000002));
 
-	//okunan degerı cekecem, OKUNAN DEGER DR REGISTIRINDA TUTULUR
-	adc_value  = ADC1 -> DR;
+	//okunan degerÃ½ cekecem, OKUNAN DEGER DR REGISTIRINDA TUTULUR
+	deger  = ADC1 -> DR;
 
 
-	return adc_value;
+	return deger;
 
 
 
